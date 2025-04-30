@@ -1,9 +1,5 @@
 ---
 title: "Homework 8 - World Bank Analysis"
-format: html
-execute:
-  eval: false
-  echo: true
 ---
 
 GITHUB URL:  <https://github.com/cmsc-vcu/cmsc408-sp2025-hw8-amybottu.git>
@@ -42,9 +38,6 @@ where
 
 ```
 
-# Exercises
-
-In the following exercises, write the SQL as requested to discover the answer.
 
 ## Task 1
 
@@ -97,7 +90,7 @@ List all non-countries.
 run_sql_and_return_html(cnx,"""
 SELECT *
 FROM world_bank_data.wdi_country
-WHERE country_type != 'Country';
+WHERE income_category IS NULL OR income_category = '';
 """)
 ```
 
@@ -125,7 +118,7 @@ execute_ddl(cnx,"""
 CREATE TABLE wdi_country AS
 SELECT *
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country';
+WHERE income_category IS NOT NULL AND income_category != '';
 """)
 ```
 
@@ -181,7 +174,7 @@ How many countries are in each region?
 run_sql_and_return_html(cnx,"""
 SELECT country_region, COUNT(*) AS country_count
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country'
+WHERE income_category IS NOT NULL AND income_category != ''
 GROUP BY country_region
 ORDER BY country_count DESC;
 """)
@@ -248,7 +241,7 @@ ORDER BY country_short_name;
 run_sql_and_return_html(cnx,"""
 SELECT income_category, COUNT(*) AS country_count
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country'
+WHERE income_category IS NOT NULL AND income_category != ''
 GROUP BY income_category
 ORDER BY country_count DESC;
 """)
@@ -285,9 +278,8 @@ UPDATE world_bank_data.wdi_country
 SET income_category = 'High income'
 WHERE country_short_name = 'Equatorial Guinea';
 """)
-
-
 ```
+
 ```{python}
 ## Now, display the country again to verify the change stuck!
 
@@ -310,7 +302,7 @@ WHERE country_short_name = 'Equatorial Guinea';
 run_sql_and_return_html(cnx,"""
 SELECT country_region, income_category, COUNT(*) AS no_of_countries
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country'
+WHERE income_category IS NOT NULL AND income_category != ''
 GROUP BY country_region, income_category
 ORDER BY country_region, income_category;
 """)
@@ -341,7 +333,7 @@ SELECT country_region,
   SUM(CASE WHEN income_category IS NULL OR income_category = '' THEN 1 ELSE 0 END) AS Other,
   COUNT(*) AS Total
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country'
+WHERE income_category IS NOT NULL AND income_category != ''
 GROUP BY country_region
 ORDER BY country_region;
 """)
@@ -365,7 +357,7 @@ ORDER BY country_region;
 run_sql_and_return_html(cnx,"""
 SELECT COUNT(*) AS low_income_count, country_region, income_category
 FROM world_bank_data.wdi_country
-WHERE income_category = 'Low income' AND country_type = 'Country'
+WHERE income_category = 'Low income'
 GROUP BY country_region, income_category
 ORDER BY low_income_count DESC
 LIMIT 1;
@@ -462,7 +454,7 @@ run_sql_and_return_html(cnx,"""
 WITH counts AS (
   SELECT country_region, income_category, COUNT(*) AS count
   FROM world_bank_data.wdi_country
-  WHERE country_type = 'Country'
+  WHERE income_category IS NOT NULL AND income_category != ''
   GROUP BY country_region, income_category
 ),
 region_totals AS (
@@ -501,7 +493,7 @@ run_sql_and_return_html(cnx,"""
 WITH base AS (
   SELECT country_region, income_category, COUNT(*) AS count
   FROM world_bank_data.wdi_country
-  WHERE country_type = 'Country'
+  WHERE income_category IS NOT NULL AND income_category != ''
   GROUP BY country_region, income_category
 ),
 totals AS (
@@ -531,9 +523,9 @@ GROUP BY country_region, t.total_count;
 run_sql_and_return_html(cnx,"""
 SELECT income_category,
        COUNT(*) AS country_count,
-       ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM world_bank_data.wdi_country WHERE country_type = 'Country'), 2) AS percent_of_total
+       ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM world_bank_data.wdi_country WHERE income_category IS NOT NULL AND income_category != ''), 2) AS percent_of_total
 FROM world_bank_data.wdi_country
-WHERE country_type = 'Country'
+WHERE income_category IS NOT NULL AND income_category != ''
 GROUP BY income_category
 ORDER BY country_count DESC;
 """)

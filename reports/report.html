@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Amy Bottu">
-<meta name="dcterms.date" content="2025-04-29">
+<meta name="dcterms.date" content="2025-04-30">
 
 <title>Homework 8 - World Bank Analysis</title>
 <style>
@@ -3089,8 +3089,7 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#problem-background" id="toc-problem-background" class="nav-link active" data-scroll-target="#problem-background">Problem Background</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <li><a href="#problem-background" id="toc-problem-background" class="nav-link active" data-scroll-target="#problem-background">Problem Background</a>
   <ul class="collapse">
   <li><a href="#task-1" id="toc-task-1" class="nav-link" data-scroll-target="#task-1">Task 1</a></li>
   <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a></li>
@@ -3140,7 +3139,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 29, 2025</p>
+      <p class="date">April 30, 2025</p>
     </div>
   </div>
   
@@ -3155,7 +3154,7 @@ vertical-align: -.125em;
 <p>GITHUB URL: <a href="https://github.com/cmsc-vcu/cmsc408-sp2025-hw8-amybottu.git" class="uri">https://github.com/cmsc-vcu/cmsc408-sp2025-hw8-amybottu.git</a></p>
 <section id="problem-background" class="level1">
 <h1>Problem Background</h1>
-<div id="d5d4c583" class="cell" data-execution_count="1">
+<div id="f8d706f9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> helpers <span class="im">import</span> create_database_engine, run_sql_and_return_df, run_sql_and_return_html, create_db_wrapper, execute_ddl_from_file, execute_ddl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load these variables from .env file.</span></span>
@@ -3168,7 +3167,7 @@ vertical-align: -.125em;
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>cnx,config <span class="op">=</span> create_db_wrapper( config_map )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="dbeecae1" class="cell" data-execution_count="2">
+<div id="eb9b0324" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do a quick test of the connection and trap the errors better!</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
@@ -3179,15 +3178,93 @@ vertical-align: -.125em;
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">where</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  table_schema in (&#39;world_bank_data&#39;)</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+TABLE_SCHEMA
+</th>
+
+<th>
+TABLE_NAME
+</th>
+
+<th>
+TABLE_ROWS
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+world_bank_data
+</td>
+
+<td>
+wdi_country
+</td>
+
+<td>
+265
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+world_bank_data
+</td>
+
+<td>
+wdi_data
+</td>
+
+<td>
+369046
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+world_bank_data
+</td>
+
+<td>
+wdi_series
+</td>
+
+<td>
+1395
+</td>
+
+</tr>
+
+<tr>
+<td colspan="3" style="text-align: left;">
+Total Rows: 3, Total Columns: 3
+</td>
+</tr>
+</tbody>
+
+</table>
 </div>
-</section>
-<section id="exercises" class="level1">
-<h1>Exercises</h1>
-<p>In the following exercises, write the SQL as requested to discover the answer.</p>
+</div>
 <section id="task-1" class="level2">
 <h2 class="anchored" data-anchor-id="task-1">Task 1</h2>
 <p>How many records are in the country table?</p>
-<div id="9f96aa27" class="cell" data-execution_count="3">
+<div id="3b00f903" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many records are in the world_bank_data.wdi_country table?</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (skills: select, aggregate)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3197,12 +3274,46 @@ vertical-align: -.125em;
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">from</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">  world_bank_data.wdi_country</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+Row Count
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+265
+</td>
+
+</tr>
+
+<tr>
+<td colspan="1" style="text-align: left;">
+Total Rows: 1, Total Columns: 1
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-2" class="level2">
 <h2 class="anchored" data-anchor-id="task-2">Task 2</h2>
 <p>Explore the first 5 records in the country table.</p>
-<div id="f23aa5db" class="cell" data-execution_count="4">
+<div id="ce536665" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## write out the first 10 records and look at the columns</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Do you see any blanks or missing data?</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">## (skills: select, limit)</span></span>
@@ -3214,12 +3325,798 @@ vertical-align: -.125em;
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">  world_bank_data.wdi_country</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">limit 5</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+Country Code
+</th>
+
+<th>
+Short Name
+</th>
+
+<th>
+Table Name
+</th>
+
+<th>
+Long Name
+</th>
+
+<th>
+2-alpha code
+</th>
+
+<th>
+Currency Unit
+</th>
+
+<th>
+Special Notes
+</th>
+
+<th>
+Region
+</th>
+
+<th>
+Income Group
+</th>
+
+<th>
+WB-2 code
+</th>
+
+<th>
+National accounts base year
+</th>
+
+<th>
+National accounts reference year
+</th>
+
+<th>
+SNA price valuation
+</th>
+
+<th>
+Lending category
+</th>
+
+<th>
+Other groups
+</th>
+
+<th>
+System of National Accounts
+</th>
+
+<th>
+Alternative conversion factor
+</th>
+
+<th>
+PPP survey year
+</th>
+
+<th>
+Balance of Payments Manual in use
+</th>
+
+<th>
+External debt Reporting status
+</th>
+
+<th>
+System of trade
+</th>
+
+<th>
+Government Accounting concept
+</th>
+
+<th>
+IMF data dissemination standard
+</th>
+
+<th>
+Latest population census
+</th>
+
+<th>
+Latest household survey
+</th>
+
+<th>
+Source of most recent Income and expenditure data
+</th>
+
+<th>
+Vital registration complete
+</th>
+
+<th>
+Latest agricultural census
+</th>
+
+<th>
+Latest industrial data
+</th>
+
+<th>
+Latest trade data
+</th>
+
+<th>
+Latest water withdrawal data
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+ABW
+</td>
+
+<td>
+Aruba
+</td>
+
+<td>
+Aruba
+</td>
+
+<td>
+Aruba
+</td>
+
+<td>
+AW
+</td>
+
+<td>
+Aruban florin
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Latin America &amp; Caribbean
+</td>
+
+<td>
+High income
+</td>
+
+<td>
+AW
+</td>
+
+<td>
+2013
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Value added at basic prices (VAB)
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Country uses the 1993 System of National Accounts methodology
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+BPM6
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+General trade system
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Enhanced General Data Dissemination System (e-GDDS)
+</td>
+
+<td>
+2020 (expected)
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Yes
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+2018.0
+</td>
+
+<td>
+NULL
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+AFE
+</td>
+
+<td>
+Africa Eastern and Southern
+</td>
+
+<td>
+Africa Eastern and Southern
+</td>
+
+<td>
+Africa Eastern and Southern
+</td>
+
+<td>
+ZH
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+26 countries, stretching from the Red Sea in the North to the Cape of Good Hope in the South (https://www.worldbank.org/en/region/afr/eastern-and-southern-africa)
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+ZH
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+AFG
+</td>
+
+<td>
+Afghanistan
+</td>
+
+<td>
+Afghanistan
+</td>
+
+<td>
+Islamic State of Afghanistan
+</td>
+
+<td>
+AF
+</td>
+
+<td>
+Afghan afghani
+</td>
+
+<td>
+The reporting period for national accounts data is designated as either calendar year basis (CY) or fiscal year basis (FY). For this country, it is fiscal year-based (fiscal year-end: March 20). Also, an estimate (PA.NUS.ATLS) of the exchange rate covers the same period and thus differs from the official exchange rate (CY).\n\nIn addition, the World Bank systematically assesses the appropriateness of official exchange rates as conversion factors. In this country, multiple or dual exchange rate activity exists and must be accounted for appropriately in underlying statistics. An alternative estimate (“alternative conversion factor” - PA.NUS.ATLS) is thus calculated as a weighted average of the different exchange rates in use in the country. Doing so better reflects economic reality and leads to more accurate cross-country comparisons and country classifications by income level. For this country, this applies to the period 1960-2006. Alternative conversion factors are used in the Atlas methodology and elsewhere in World Development Indicators as single-year conversion factors.
+</td>
+
+<td>
+South Asia
+</td>
+
+<td>
+Low income
+</td>
+
+<td>
+AF
+</td>
+
+<td>
+2016
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Value added at basic prices (VAB)
+</td>
+
+<td>
+IDA
+</td>
+
+<td>
+HIPC
+</td>
+
+<td>
+Country uses the 2008 System of National Accounts methodology
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+BPM6
+</td>
+
+<td>
+Estimate
+</td>
+
+<td>
+General trade system
+</td>
+
+<td>
+Consolidated central government
+</td>
+
+<td>
+Enhanced General Data Dissemination System (e-GDDS)
+</td>
+
+<td>
+1979
+</td>
+
+<td>
+Demographic and Health Survey, 2015
+</td>
+
+<td>
+Integrated household survey (IHS), 2016/17
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+2018.0
+</td>
+
+<td>
+NULL
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+AFW
+</td>
+
+<td>
+Africa Western and Central
+</td>
+
+<td>
+Africa Western and Central
+</td>
+
+<td>
+Africa Western and Central
+</td>
+
+<td>
+ZI
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+22 countries, stretching from the westernmost point of Africa, across the equator, and partly along the Atlantic Ocean till the Republic of Congo in the South (https://www.worldbank.org/en/region/afr/western-and-central-africa)
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+ZI
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+AGO
+</td>
+
+<td>
+Angola
+</td>
+
+<td>
+Angola
+</td>
+
+<td>
+People&#39;s Republic of Angola
+</td>
+
+<td>
+AO
+</td>
+
+<td>
+Angolan kwanza
+</td>
+
+<td>
+The World Bank systematically assesses the appropriateness of official exchange rates as conversion factors. In this country, multiple or dual exchange rate activity exists and must be accounted for appropriately in underlying statistics. An alternative estimate (“alternative conversion factor” - PA.NUS.ATLS) is thus calculated as a weighted average of the different exchange rates in use in the country. Doing so better reflects economic reality and leads to more accurate cross-country comparisons and country classifications by income level. For this country, this applies to the period 1994-2023. Alternative conversion factors are used in the Atlas methodology and elsewhere in World Development Indicators as single-year conversion factors.
+</td>
+
+<td>
+Sub-Saharan Africa
+</td>
+
+<td>
+Lower middle income
+</td>
+
+<td>
+AO
+</td>
+
+<td>
+2002
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Value added at basic prices (VAB)
+</td>
+
+<td>
+IBRD
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+Country uses the 1993 System of National Accounts methodology
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+BPM6
+</td>
+
+<td>
+Actual
+</td>
+
+<td>
+General trade system
+</td>
+
+<td>
+Budgetary central government
+</td>
+
+<td>
+Enhanced General Data Dissemination System (e-GDDS)
+</td>
+
+<td>
+2014
+</td>
+
+<td>
+Demographic and Health Survey, 2015/16
+</td>
+
+<td>
+Integrated household survey (IHS), 2008/09
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+NULL
+</td>
+
+<td>
+2018.0
+</td>
+
+<td>
+NULL
+</td>
+
+</tr>
+
+<tr>
+<td colspan="31" style="text-align: left;">
+Total Rows: 5, Total Columns: 31
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-3" class="level2">
 <h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
 <p>List all non-countries.</p>
-<div id="7a99a9ff" class="cell" data-execution_count="5">
+<div id="a953cec8" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## task 3</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">## Which records are NOT for countries, that is they&#39;re for regions or groups of countries.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">## How can you tell?</span></span>
@@ -3229,14 +4126,56 @@ vertical-align: -.125em;
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type != &#39;Country&#39;;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NULL OR income_category = &#39;&#39;;</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;income_category&#39; in &#39;where clause&#39;”)\n[SQL: \nSELECT *\nFROM world_bank_data.wdi_country\nWHERE income_category IS NULL OR income_category = &#39;&#39;;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-4" class="level2">
 <h2 class="anchored" data-anchor-id="task-4">Task 4</h2>
 <p>Create your own copy of WDI_Country containing just countries.</p>
-<div id="320238a6" class="cell" data-execution_count="6">
+<div id="74df1b55" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## task 4</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">## The WDI table clearly contains information for countries and non-countries</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">## using CREATE TABLE ... SELECT from WHERE syntax.</span></span>
@@ -3249,26 +4188,97 @@ vertical-align: -.125em;
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">drop table if exists wdi_country;</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="de8c2be6" class="cell" data-execution_count="7">
+<div id="d0602cc4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create table</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>execute_ddl(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">CREATE TABLE wdi_country AS</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;;</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+Errors
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+&lt;hr/&gt;Error executing statement: &lt;b&gt;CREATE TABLE wdi_country AS SELECT * FROM world_bank_data.wdi_country WHERE income_category IS NOT NULL AND income_category != &#39;&#39;&lt;/b&gt;&lt;br/&gt; Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;income_category&#39; in &#39;where clause&#39;”)\n[SQL: CREATE TABLE wdi_country AS SELECT * FROM world_bank_data.wdi_country WHERE income_category IS NOT NULL AND income_category != &#39;&#39;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)&lt;br/&gt;
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 </div>
-<div id="d420a43e" class="cell" data-execution_count="8">
+</div>
+<div id="8f7a8be2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show number of records</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT COUNT(*) FROM wdi_country;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+ProgrammingError
+</td>
+
+<td>
+Programming Error: (pymysql.err.ProgrammingError) (1146, “Table &#39;sp25_bottuaj2_user.wdi_country&#39; doesn&#39;t exist”)\n[SQL: \nSELECT COUNT(*) FROM wdi_country;\n]\n(Background on this error at: https://sqlalche.me/e/20/f405)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-5" class="level2">
 <h2 class="anchored" data-anchor-id="task-5">Task 5</h2>
 <p>According to the World Bank, in 2020 there were how many countries in the world?</p>
-<div id="722acefd" class="cell" data-execution_count="9">
+<div id="369409d5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">## (skills: select, aggregate)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
@@ -3276,12 +4286,54 @@ vertical-align: -.125em;
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE year = 2020;</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;year&#39; in &#39;where clause&#39;”)\n[SQL: \nSELECT COUNT(*) AS “Number of countries in 2020”\nFROM world_bank_data.wdi_country\nWHERE year = 2020;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-6" class="level2">
 <h2 class="anchored" data-anchor-id="task-6">Task 6</h2>
 <p>What are all unique values of region in the wdi_country table?</p>
-<div id="39a996b7" class="cell" data-execution_count="10">
+<div id="27cea2a1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Let&#39;s investigate the country_region field.</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">## What is the domain of the country_region field? That is,</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">## what are the unique values found there?</span></span>
@@ -3293,28 +4345,112 @@ vertical-align: -.125em;
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_region;</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT DISTINCT country_region\nFROM world_bank_data.wdi_country\nORDER BY country_region;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-7" class="level2">
 <h2 class="anchored" data-anchor-id="task-7">Task 7</h2>
 <p>How many countries are in each region?</p>
-<div id="02f9d3a7" class="cell" data-execution_count="11">
+<div id="885b60e0" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">## How many countries are in each region?</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">## (skills: select, aggregate, group by, order by)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT country_region, COUNT(*) AS country_count</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY country_region</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_count DESC;</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_region, COUNT(*) AS country_count\nFROM world_bank_data.wdi_country\nWHERE income_category IS NOT NULL AND income_category != &#39;&#39;\nGROUP BY country_region\nORDER BY country_count DESC;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-8" class="level2">
 <h2 class="anchored" data-anchor-id="task-8">Task 8</h2>
 <p>List the country full names and regions for all countries in north america.</p>
-<div id="c8d07ae8" class="cell" data-execution_count="12">
+<div id="b0f5e405" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">## List the country full names and regions for all countries in north america</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">## (skills: select, where, order by)</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3324,11 +4460,53 @@ vertical-align: -.125em;
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_region = &#39;North America&#39;</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_full_name;</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_full_name&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_full_name, country_region\nFROM world_bank_data.wdi_country\nWHERE country_region = &#39;North America&#39;\nORDER BY country_full_name;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-9" class="level2">
 <h2 class="anchored" data-anchor-id="task-9">Task 9</h2>
-<div id="1e1deca5" class="cell" data-execution_count="13">
+<div id="670cf151" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">## The last World Cup soccer tournament was hosted by Qatar.</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">## What region contains Qatar?  List the region, country short name and full name</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">## (skills: select, where)</span></span>
@@ -3338,11 +4516,53 @@ vertical-align: -.125em;
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_short_name = &#39;Qatar&#39;;</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_region, country_short_name, country_full_name\nFROM world_bank_data.wdi_country\nWHERE country_short_name = &#39;Qatar&#39;;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-10" class="level2">
 <h2 class="anchored" data-anchor-id="task-10">Task 10</h2>
-<div id="6a1fc4f9" class="cell" data-execution_count="14">
+<div id="eb329e04" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">## There are two abbreviation fields in the data country_abbr and country_wb_abbr.</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">## List the country code, short name, abbr, wb_abbr and region for all the countries</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">## where the abbr and wb_abbr are different.</span></span>
@@ -3354,11 +4574,53 @@ vertical-align: -.125em;
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_abbr != country_wb_abbr</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_short_name;</span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_code&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_code, country_short_name, country_abbr, country_wb_abbr, country_region\nFROM world_bank_data.wdi_country\nWHERE country_abbr != country_wb_abbr\nORDER BY country_short_name;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-11" class="level2">
 <h2 class="anchored" data-anchor-id="task-11">Task 11</h2>
-<div id="df61e4a6" class="cell" data-execution_count="15">
+<div id="e7bd165b" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Now, let&#39;s investigate the &quot;income category&quot; field.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">## List the income categories and the number of countries in each</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">## income category in descending order of most countries to least.</span></span>
@@ -3367,15 +4629,57 @@ vertical-align: -.125em;
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT income_category, COUNT(*) AS country_count</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY income_category</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_count DESC;</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;income_category&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT income_category, COUNT(*) AS country_count\nFROM world_bank_data.wdi_country\nWHERE income_category IS NOT NULL AND income_category != &#39;&#39;\nGROUP BY income_category\nORDER BY country_count DESC;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-12" class="level2">
 <h2 class="anchored" data-anchor-id="task-12">Task 12</h2>
-<div id="28f23dba" class="cell" data-execution_count="16">
+<div id="1c52e271" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Mystery task.  Looking at the table from Task 11 (anything odd?) write the</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">## next obvious query based on the results in the table.</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">## At a minimum, your query should put country short name in the first column.</span></span>
@@ -3387,11 +4691,53 @@ vertical-align: -.125em;
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NULL OR income_category = &#39;&#39;;</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_short_name&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_short_name\nFROM world_bank_data.wdi_country\nWHERE income_category IS NULL OR income_category = &#39;&#39;;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-13" class="level2">
 <h2 class="anchored" data-anchor-id="task-13">Task 13</h2>
-<div id="05ca1566" class="cell" data-execution_count="17">
+<div id="3ac12959" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">## OK, this HAS to be an error. Let&#39;s make a assumption that the country </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">## in question, because they are oil-rich, are &quot;high income&quot;.  </span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Write an update comment to correct the issue.</span></span>
@@ -3402,8 +4748,37 @@ vertical-align: -.125em;
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">SET income_category = &#39;High income&#39;</span></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_short_name = &#39;Equatorial Guinea&#39;;</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+Errors
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+&lt;hr/&gt;Error executing statement: &lt;b&gt;UPDATE world_bank_data.wdi_country SET income_category = &#39;High income&#39; WHERE country_short_name = &#39;Equatorial Guinea&#39;&lt;/b&gt;&lt;br/&gt; Error: (pymysql.err.OperationalError) (1142, “UPDATE command denied to user &#39;sp25_bottuaj2&#39;@&#39;173.53.69.249&#39; for table &#39;wdi_country&#39;”)\n[SQL: UPDATE world_bank_data.wdi_country SET income_category = &#39;High income&#39; WHERE country_short_name = &#39;Equatorial Guinea&#39;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)&lt;br/&gt;
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 </div>
-<div id="7e56fba2" class="cell" data-execution_count="18">
+</div>
+<div id="9b77a8dc" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Now, display the country again to verify the change stuck!</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
@@ -3411,11 +4786,53 @@ vertical-align: -.125em;
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_short_name = &#39;Equatorial Guinea&#39;;</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_short_name&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_short_name, income_category\nFROM world_bank_data.wdi_country\nWHERE country_short_name = &#39;Equatorial Guinea&#39;;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-14" class="level2">
 <h2 class="anchored" data-anchor-id="task-14">Task 14</h2>
-<div id="2ef0f392" class="cell" data-execution_count="19">
+<div id="0993ebff" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Write a single query that show the number of countries in each </span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">## &quot;Region&quot;-&quot;Income Group&quot; pair.  The table should have 3 columns:</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">## region, income group, and no.of.countries.</span></span>
@@ -3424,15 +4841,57 @@ vertical-align: -.125em;
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT country_region, income_category, COUNT(*) AS no_of_countries</span></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY country_region, income_category</span></span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_region, income_category;</span></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_region, income_category, COUNT(*) AS no_of_countries\nFROM world_bank_data.wdi_country\nWHERE income_category IS NOT NULL AND income_category != &#39;&#39;\nGROUP BY country_region, income_category\nORDER BY country_region, income_category;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-15" class="level2">
 <h2 class="anchored" data-anchor-id="task-15">Task 15</h2>
-<div id="171abd2b" class="cell" data-execution_count="20">
+<div id="786c5597" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Examine the result from task 14. It would be really cool to</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">## present the results of this table in a 2-D form, with </span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">## columns for each income category (high, upper middle, lower middle, low, other)</span></span>
@@ -3454,15 +4913,57 @@ vertical-align: -.125em;
 <span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="st">  SUM(CASE WHEN income_category IS NULL OR income_category = &#39;&#39; THEN 1 ELSE 0 END) AS Other,</span></span>
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="st">  COUNT(*) AS Total</span></span>
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY country_region</span></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_region;</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_region,\n SUM(CASE WHEN income_category = &#39;High income&#39; THEN 1 ELSE 0 END) AS High,\n SUM(CASE WHEN income_category = &#39;Upper middle income&#39; THEN 1 ELSE 0 END) AS Upper_Middle,\n SUM(CASE WHEN income_category = &#39;Lower middle income&#39; THEN 1 ELSE 0 END) AS Lower_Middle,\n SUM(CASE WHEN income_category = &#39;Low income&#39; THEN 1 ELSE 0 END) AS Low,\n SUM(CASE WHEN income_category IS NULL OR income_category = &#39;&#39; THEN 1 ELSE 0 END) AS Other,\n COUNT(*) AS Total\nFROM world_bank_data.wdi_country\nWHERE income_category IS NOT NULL AND income_category != &#39;&#39;\nGROUP BY country_region\nORDER BY country_region;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-16" class="level2">
 <h2 class="anchored" data-anchor-id="task-16">Task 16</h2>
-<div id="5adf3f5f" class="cell" data-execution_count="21">
+<div id="6eab20aa" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Wow! what a cool table!  It is very interesting to see where the money</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">## sits around the world.  Using the general approach from Task 14 above</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">## and write a query to return the single region with the most lower-income</span></span>
@@ -3477,16 +4978,58 @@ vertical-align: -.125em;
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT COUNT(*) AS low_income_count, country_region, income_category</span></span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category = &#39;Low income&#39; AND country_type = &#39;Country&#39;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category = &#39;Low income&#39;</span></span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY country_region, income_category</span></span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY low_income_count DESC</span></span>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 1;</span></span>
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT COUNT(*) AS low_income_count, country_region, income_category\nFROM world_bank_data.wdi_country\nWHERE income_category = &#39;Low income&#39;\nGROUP BY country_region, income_category\nORDER BY low_income_count DESC\nLIMIT 1;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-17" class="level2">
 <h2 class="anchored" data-anchor-id="task-17">Task 17</h2>
-<div id="96511948" class="cell" data-execution_count="22">
+<div id="4567bd60" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Are you getting the hand of this? Good! We need to take a look at all</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">## the countries in the same region and with the same income category as</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">## the Marshall Islands.</span></span>
@@ -3510,11 +5053,53 @@ vertical-align: -.125em;
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_short_name;</span></span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_code&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT country_code, country_short_name, country_region, income_category\nFROM world_bank_data.wdi_country\nWHERE country_region = (\n SELECT country_region\n FROM world_bank_data.wdi_country\n WHERE country_code = &#39;MHL&#39;\n)\nAND income_category = (\n SELECT income_category\n FROM world_bank_data.wdi_country\n WHERE country_code = &#39;MHL&#39;\n)\nORDER BY country_short_name;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-18" class="level2">
 <h2 class="anchored" data-anchor-id="task-18">Task 18</h2>
-<div id="28ce02e3" class="cell" data-execution_count="23">
+<div id="0473430b" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">## OK - let&#39;s raise the heat in the kitchen! Review the output from task 14.</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">## You&#39;ll see that some of the regions do not contain all of the income</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">## levels.  For example, the Europe &amp; Central Asia region does not have</span></span>
@@ -3547,11 +5132,53 @@ vertical-align: -.125em;
 <span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE country_type = &#39;Country&#39;</span></span>
 <span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="st">);</span></span>
 <span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT r.country_region, i.income_category\nFROM (\n SELECT DISTINCT country_region\n FROM world_bank_data.wdi_country\n) r\nCROSS JOIN (\n SELECT DISTINCT income_category\n FROM world_bank_data.wdi_country\n) i\nWHERE (r.country_region, i.income_category) NOT IN (\n SELECT DISTINCT country_region, income_category\n FROM world_bank_data.wdi_country\n WHERE country_type = &#39;Country&#39;\n);\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-19" class="level2">
 <h2 class="anchored" data-anchor-id="task-19">Task 19</h2>
-<div id="bcb4a60e" class="cell" data-execution_count="24">
+<div id="2484a4ac" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Hot enough, yet?  Let&#39;s go for ghost-pepper HOT!  Now let&#39;s build some</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">## percentage tables.  For example, across the entire sample, what</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">## is the percentage of total countries in each income category?</span></span>
@@ -3571,7 +5198,7 @@ vertical-align: -.125em;
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="st">WITH counts AS (</span></span>
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT country_region, income_category, COUNT(*) AS count</span></span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM world_bank_data.wdi_country</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY country_region, income_category</span></span>
 <span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
 <span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="st">region_totals AS (</span></span>
@@ -3595,11 +5222,53 @@ vertical-align: -.125em;
 <span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="st">JOIN income_totals i ON c.income_category = i.income_category</span></span>
 <span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="st">JOIN total_total t;</span></span>
 <span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nWITH counts AS (\n SELECT country_region, income_category, COUNT(<em>) AS count\n FROM world_bank_data.wdi_country\n WHERE income_category IS NOT NULL AND income_category != &#39;&#39;\n GROUP BY country_region, income_category\n),\nregion_totals AS (\n SELECT country_region, SUM(count) AS region_total\n FROM counts\n GROUP BY country_region\n),\nincome_totals AS (\n SELECT income_category, SUM(count) AS income_total\n FROM counts\n GROUP BY income_category\n),\ntotal_total AS (\n SELECT SUM(count) AS grand_total FROM counts\n)\nSELECT c.country_region, c.income_category, c.count,\n r.region_total, i.income_total, t.grand_total,\n ROUND(100.0 </em> c.count / t.grand_total, 2) AS percent_of_total\nFROM counts c\nJOIN region_totals r ON c.country_region = r.country_region\nJOIN income_totals i ON c.income_category = i.income_category\nJOIN total_total t;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-20" class="level2">
 <h2 class="anchored" data-anchor-id="task-20">Task 20</h2>
-<div id="417aed8b" class="cell" data-execution_count="25">
+<div id="2487cbe4" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">## SLAM DUNK TIME!  Using the resulting table CTEs from Task 19,</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">## print table similar to the table in Task 15, with Income group in the</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">## columns, Region in the rows and Percent of total in each cell of the table.</span></span>
@@ -3608,7 +5277,7 @@ vertical-align: -.125em;
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="st">WITH base AS (</span></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT country_region, income_category, COUNT(*) AS count</span></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM world_bank_data.wdi_country</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="st">  GROUP BY country_region, income_category</span></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="st">totals AS (</span></span>
@@ -3623,11 +5292,53 @@ vertical-align: -.125em;
 <span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="st">FROM base, totals t</span></span>
 <span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY country_region, t.total_count;</span></span>
 <span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;country_region&#39; in &#39;field list&#39;”)\n[SQL: \nWITH base AS (\n SELECT country_region, income_category, COUNT(<em>) AS count\n FROM world_bank_data.wdi_country\n WHERE income_category IS NOT NULL AND income_category != &#39;&#39;\n GROUP BY country_region, income_category\n),\ntotals AS (\n SELECT SUM(count) AS total_count FROM base\n)\nSELECT country_region,\n ROUND(100.0 </em> SUM(CASE WHEN income_category = &#39;High income&#39; THEN count ELSE 0 END) / t.total_count, 2) AS High,\n ROUND(100.0 * SUM(CASE WHEN income_category = &#39;Upper middle income&#39; THEN count ELSE 0 END) / t.total_count, 2) AS Upper_Middle,\n ROUND(100.0 * SUM(CASE WHEN income_category = &#39;Lower middle income&#39; THEN count ELSE 0 END) / t.total_count, 2) AS Lower_Middle,\n ROUND(100.0 * SUM(CASE WHEN income_category = &#39;Low income&#39; THEN count ELSE 0 END) / t.total_count, 2) AS Low,\n ROUND(100.0 * SUM(CASE WHEN income_category IS NULL OR income_category = &#39;&#39; THEN count ELSE 0 END) / t.total_count, 2) AS Other\nFROM base, totals t\nGROUP BY country_region, t.total_count;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 <section id="task-21" class="level2">
 <h2 class="anchored" data-anchor-id="task-21">Task 21</h2>
-<div id="45d9485c" class="cell" data-execution_count="26">
+<div id="fa29ac7d" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">## ANOTHER DUNK!  Using the resulting table CTEs from Task 19,</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">## print a table listing the number, totals and percentage of countries</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">## by income category.</span></span>
@@ -3637,12 +5348,54 @@ vertical-align: -.125em;
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>run_sql_and_return_html(cnx,<span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT income_category,</span></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(*) AS country_count,</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="st">       ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM world_bank_data.wdi_country WHERE country_type = &#39;Country&#39;), 2) AS percent_of_total</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="st">       ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM world_bank_data.wdi_country WHERE income_category IS NOT NULL AND income_category != &#39;&#39;), 2) AS percent_of_total</span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM world_bank_data.wdi_country</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country_type = &#39;Country&#39;</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE income_category IS NOT NULL AND income_category != &#39;&#39;</span></span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY income_category</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY country_count DESC;</span></span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<table class="dataframe table table-sm table-striped small">
+
+<thead>
+
+<tr>
+
+<th>
+ErrorType
+</th>
+
+<th>
+ErrorMessage
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+OperationalError
+</td>
+
+<td>
+Operational Error: (pymysql.err.OperationalError) (1054, “Unknown column &#39;income_category&#39; in &#39;field list&#39;”)\n[SQL: \nSELECT income_category,\n COUNT(<em>) AS country_count,\n ROUND(100.0 </em> COUNT(<em>) / (SELECT COUNT(</em>) FROM world_bank_data.wdi_country WHERE income_category IS NOT NULL AND income_category != &#39;&#39;), 2) AS percent_of_total\nFROM world_bank_data.wdi_country\nWHERE income_category IS NOT NULL AND income_category != &#39;&#39;\nGROUP BY income_category\nORDER BY country_count DESC;\n]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)
+</td>
+
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: left;">
+Total Rows: 1, Total Columns: 2
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
 </div>
 </section>
 </section>
@@ -3704,16 +5457,6 @@ vertical-align: -.125em;
 <li><code>.env</code>: Stores database credentials securely (not included in repo)</li>
 <li><code>README.qmd</code>: This file (formatted for Quarto rendering)</li>
 <li><code>helpers.py</code>: Provided Python helpers for executing SQL and managing output</li>
-</ul>
-<hr>
-</section>
-<section id="notes-to-future-me" class="level2">
-<h2 class="anchored" data-anchor-id="notes-to-future-me">💡 Notes to Future Me</h2>
-<p>This project was a great chance to practice complex SQL in a real-world context. If you’re reviewing this later, remember:</p>
-<ul>
-<li>Breaking down complex queries into smaller parts really helped.</li>
-<li>Tasks 14–20 are great examples of how to summarize and pivot datasets.</li>
-<li>Use this as a reference for any future work with global datasets, data visualization, or analytics platforms.</li>
 </ul>
 </section>
 </div>

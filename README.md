@@ -36,14 +36,4 @@ The goal of this assignment is to improve SQL skills and apply them to a large d
 - `README.qmd`: This file (formatted for Quarto rendering)
 - `helpers.py`: Provided Python helpers for executing SQL and managing output
 
----
-
-## 💡 Notes to Future Me
-
-This project was a great chance to practice complex SQL in a real-world context. If you're reviewing this later, remember:
-
-- Breaking down complex queries into smaller parts really helped.
-- Tasks 14–20 are great examples of how to summarize and pivot datasets.
-- Use this as a reference for any future work with global datasets, data visualization, or analytics platforms.
-
 
